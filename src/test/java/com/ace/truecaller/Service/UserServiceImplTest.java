@@ -145,4 +145,101 @@ public class UserServiceImplTest {
         assertEquals("boyo", user.getLastName());
     }
 
+    @Test
+    public void testThatWeCanGetUserUsingUserFirstName(){
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstName("tee");
+        userRequest.setLastName("bayo");
+        userRequest.setUserName("ray");
+        userRequest.setPhoneNumber("09087678");
+        userRequest.setPassword("12345");
+
+        userService.createUser(userRequest);
+
+        UserRequest userRequest1 = new UserRequest();
+        userRequest1.setFirstName("tee");
+        userRequest1.setLastName("boyo");
+        userRequest1.setUserName("coder");
+        userRequest1.setPhoneNumber("09087678");
+        userRequest1.setPassword("12345");
+
+        userService.createUser(userRequest1);
+
+        UserRequest userRequest2 = new UserRequest();
+        userRequest2.setFirstName("tee");
+        userRequest2.setLastName("paul");
+        userRequest2.setUserName("momentwithace");
+        userRequest2.setPhoneNumber("09087678");
+        userRequest2.setPassword("12345");
+
+        userService.createUser(userRequest2);
+
+        UserRequest userRequest3 = new UserRequest();
+        userRequest3.setFirstName("mike");
+        userRequest3.setLastName("paul");
+        userRequest3.setUserName("momentwithace");
+        userRequest3.setPhoneNumber("09087678");
+        userRequest3.setPassword("12345");
+
+        userService.createUser(userRequest3);
+
+        assertEquals(3, userService.getUserByFirstName("tee").size());
+    }
+
+    @Test
+    public void testThatWeCanGetListOfUserWithTheSameLastName(){
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstName("tee");
+        userRequest.setLastName("bayo");
+        userRequest.setUserName("ray");
+        userRequest.setPhoneNumber("09087678");
+        userRequest.setPassword("12345");
+
+        userService.createUser(userRequest);
+
+        UserRequest userRequest1 = new UserRequest();
+        userRequest1.setFirstName("tee");
+        userRequest1.setLastName("boyo");
+        userRequest1.setUserName("coder");
+        userRequest1.setPhoneNumber("09087678");
+        userRequest1.setPassword("12345");
+
+        userService.createUser(userRequest1);
+
+        UserRequest userRequest2 = new UserRequest();
+        userRequest2.setFirstName("tee");
+        userRequest2.setLastName("paul");
+        userRequest2.setUserName("momentwithace");
+        userRequest2.setPhoneNumber("09087678");
+        userRequest2.setPassword("12345");
+
+        userService.createUser(userRequest2);
+
+        UserRequest userRequest3 = new UserRequest();
+        userRequest3.setFirstName("mike");
+        userRequest3.setLastName("paul");
+        userRequest3.setUserName("momentwithace");
+        userRequest3.setPhoneNumber("09087678");
+        userRequest3.setPassword("12345");
+
+        userService.createUser(userRequest3);
+
+        assertEquals(2, userService.getUserByLastName("paul").size());
+    }
+
+    @Test
+    public void testThatUserCanSaveContact(){
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstName("ace");
+        userRequest.setLastName("boyo");
+        userRequest.setUserName("unlikeace");
+        userRequest.setPhoneNumber("09087856");
+
+    }
+
+
+
+
+
+
 }

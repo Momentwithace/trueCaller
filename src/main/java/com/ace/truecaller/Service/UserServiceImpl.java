@@ -14,14 +14,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service // used for services
-//@Slf4j
+@Service // used for servicesContactRegisterResponse
+@Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired // used to create an instance of a class
     private UserRepository userRepository;
 
     @Override
     public BothRegisterAndUser createUser(UserRequest userRequest) {
+        log.info("registering user {}", userRequest);
         User user = new User();
         user.setUserName(userRequest.getUserName());
         user.setLastName(userRequest.getLastName());
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userRequest.getFirstName());
         user.setPassword(userRequest.getPassword());
         user = userRepository.save(user);
+
+        log.info("finished registration {}", user);
 
         return new BothRegisterAndUser(user, new RegisterResponse("User registered Successfully!"));
     }
@@ -93,5 +96,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getListOfUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getUserByFirstName(String firstName) {
+       var usersWithFirstNameProvided =  userRepository.findAll()
+                .stream()
+                .filter(user -> user.getFirstName().equalsIgnoreCase(firstName))
+                .toList();
+
+
+        return usersWithFirstNameProvided;
+    }
+
+    @Override
+    public List<User> getUserByLastName(String lastName) {
+        var listOfUserWithSameLastName = userRepository.findAll()
+                .stream()
+                .filter(user -> user.getLastName().equalsIgnoreCase(lastName))
+                .toList();
+
+
+        return listOfUserWithSameLastName;
     }
 }

@@ -25,7 +25,6 @@ public class UserController {
     @PostMapping
     public RegisterResponse createUser(@RequestBody UserRequest userRequest){
         return userService.createUser(userRequest).getRegisterResponse();
-
     }
 
     @GetMapping("/{userId}")
@@ -39,8 +38,8 @@ public class UserController {
        return new ResponseEntity<>( userService.updateUser(updateRequest), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public DeleteResponse deleteUser(String userName){
+    @DeleteMapping("/{userName}")
+    public DeleteResponse deleteUser(@PathVariable String userName){
         return userService.deleteUser(userName);
     }
 
@@ -53,4 +52,5 @@ public class UserController {
     public List<User> getListOfUser(){
         return userService.getListOfUser();
     }
+
 }

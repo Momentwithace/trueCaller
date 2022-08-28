@@ -8,6 +8,7 @@ import com.ace.truecaller.Dtos.Response.RegisterResponse;
 import com.ace.truecaller.Dtos.Response.UpdateResponse;
 import com.ace.truecaller.Models.User;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
@@ -25,4 +26,7 @@ public interface UserService {
     List<User> getListOfUser();
 
 
+    List<User> getUserByFirstName(String firstName);
+
+    List<User> getUserByLastName(String lastName);
 }
